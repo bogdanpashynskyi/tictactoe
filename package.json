@@ -17,6 +17,7 @@
   "bugs": {
     "url": "https://github.com/bogdanpashynskyi/tictactoe/issues"
   },
+  "devtool": "source-map",
   "homepage": "https://github.com/bogdanpashynskyi/tictactoe#readme",
   "devDependencies": {
     "@babel/core": "^7.3.3",
