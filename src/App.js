@@ -24,13 +24,17 @@ class App extends React.Component {
 		this.state = {
 			currentValue: "X",
 			grid: GRID,
-			winner: ''
+			winner: null
 		}
-
+		
 		this.handleClick = this.handleClick.bind(this)
 	}
 
 	handleClick({ rowIndex, columnIndex }) {
+
+		if (this.state.winner) {
+			return
+		}
 		const {
 			currentValue, 
 			grid
@@ -53,11 +57,15 @@ class App extends React.Component {
 		const gridItems = this.getIndexes({grid: this.state.grid, value: currentValue});
 
 		const winner = this.checkWinner(gridItems);
-		this.setState({winner: winner }); 
-		
+		this.setState({ winner: winner }); 
 	}
 
 	checkWinner(grid) {
+
+		if (this.state.winner !== null) {
+			return
+		}
+
 		const found = winCombos.find(indexes => {
 			const [a, b, c] = [...indexes];
 
@@ -94,6 +102,7 @@ class App extends React.Component {
 		const { grid } = this.state;
     return (
       <div>
+				<h2>Tic Tac Toe</h2>
 				<Board 
 					rows={grid}
 					onClick={this.handleClick}
