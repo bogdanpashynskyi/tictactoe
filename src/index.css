@@ -1,3 +1,15 @@
 #app {
     text-align: center;
 }
+
+.rows {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.boxes {
+    border: 1px solid black;
+    height: 60px;
+    width: 60px;
+}
