@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-const title = 'TicTacToe!';
+import App from './App.js'
+import './index.css'
 
 ReactDOM.render(
-  <div className="title">{title}</div>,
+  <App />,
   document.getElementById('app')
 );
 
