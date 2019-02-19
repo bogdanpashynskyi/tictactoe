@@ -1,11 +1,14 @@
 import React from 'react';
 import Board from './components/Board';
+import cloneDeep from 'lodash.clonedeep'
 
 const ROWS = 3;
 const COLUMNS = 3;
 const ROW_ARR = new Array(ROWS).fill('');
 const COLUMN_ARR = new Array(COLUMNS).fill('');
 const GRID = ROW_ARR.map(item => COLUMN_ARR.slice());
+const cloneGrid = cloneDeep(GRID);
+
 const winCombos = [
 	'012',
 	'036',
@@ -17,6 +20,10 @@ const winCombos = [
 	'246',
 ]
 
+const styles = {
+	"display": "flex",
+}
+
 class App extends React.Component {
   constructor() {
 		super();
@@ -26,8 +33,9 @@ class App extends React.Component {
 			grid: GRID,
 			winner: null
 		}
-		
-		this.handleClick = this.handleClick.bind(this)
+
+		this.handleClick = this.handleClick.bind(this);
+		this.restartGame = this.restartGame.bind(this);
 	}
 
 	handleClick({ rowIndex, columnIndex }) {
@@ -57,7 +65,7 @@ class App extends React.Component {
 		const gridItems = this.getIndexes({grid: this.state.grid, value: currentValue});
 
 		const winner = this.checkWinner(gridItems);
-		this.setState({ winner: winner }); 
+		this.setState({ winner: winner });
 	}
 
 	checkWinner(grid) {
@@ -97,6 +105,14 @@ class App extends React.Component {
 	
 		return arr;
 	}
+
+	restartGame() {
+		const newGrid = cloneDeep(cloneGrid);
+		this.setState({ 
+			grid: newGrid, 
+			winner: null, 
+			currentValue: 'X' })
+	}
 	
   render() {
 		const { grid } = this.state;
@@ -107,7 +123,12 @@ class App extends React.Component {
 					rows={grid}
 					onClick={this.handleClick}
 				/>
-				{ this.state.winner ? <div> Player {this.state.winner} won! </div> : ''}
+				{ this.state.winner 
+				? <div>
+						<div className={styles}> Player {this.state.winner} won! </div> 
+					</div>
+				: ''}
+				<button onClick={this.restartGame}> Restart </button>
       </div>
     )}
 }
