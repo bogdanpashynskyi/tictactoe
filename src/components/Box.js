@@ -1,8 +1,18 @@
 import React from 'react'
 
-const Box = () => {
+const Box = ({
+    onClick,
+    columnIndex,
+    rowIndex,
+    value
+}) => {
+  const indexes = { rowIndex, columnIndex }
     return (
-        <div> Box </div>
+        <div 
+        className="boxes"
+        onClick={() => onClick(indexes)}>
+            <h3> {value} </h3>
+        </div>
     )
 }
 
