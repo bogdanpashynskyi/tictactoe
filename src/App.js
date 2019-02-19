@@ -31,7 +31,8 @@ class App extends React.Component {
 		this.state = {
 			currentValue: "X",
 			grid: GRID,
-			winner: null
+			winner: null,
+			draw: false,
 		}
 
 		this.handleClick = this.handleClick.bind(this);
@@ -39,7 +40,8 @@ class App extends React.Component {
 	}
 
 	handleClick({ rowIndex, columnIndex }) {
-
+		
+		// disable clicks if there is a winner
 		if (this.state.winner) {
 			return
 		}
@@ -61,11 +63,24 @@ class App extends React.Component {
 			grid,
 			currentValue: nextValue, 
 		})
-		
 		const gridItems = this.getIndexes({grid: this.state.grid, value: currentValue});
-
 		const winner = this.checkWinner(gridItems);
 		this.setState({ winner: winner });
+
+		this.checkForDraw(gridItems)
+	}
+
+	checkForDraw(grid) {
+		let count = 0;
+		for (let i = 0; grid.length > i; i++) {
+			if (grid[i]) {
+				count = count + 1;
+			}
+		}
+		console.log(count)
+		if (count === 5) {
+			this.setState({ draw: true })
+		}
 	}
 
 	checkWinner(grid) {
@@ -111,7 +126,8 @@ class App extends React.Component {
 		this.setState({ 
 			grid: newGrid, 
 			winner: null, 
-			currentValue: 'X' })
+			currentValue: 'X',
+			draw: false })
 	}
 	
   render() {
@@ -128,6 +144,9 @@ class App extends React.Component {
 						<div className={styles}> Player {this.state.winner} won! </div> 
 					</div>
 				: ''}
+				{ this.state.draw
+					? <div> It's a draw </div> 
+					: ''}
 				<button onClick={this.restartGame}> Restart </button>
       </div>
     )}
