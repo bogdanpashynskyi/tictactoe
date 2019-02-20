@@ -20,8 +20,17 @@ const winCombos = [
 	'246',
 ]
 
-const styles = {
+const flex = {
 	"display": "flex",
+	
+}
+
+const margin = {
+	"margin": "10px",
+}
+
+const ghost = {
+	"opacity": "0",
 }
 
 class App extends React.Component {
@@ -33,6 +42,7 @@ class App extends React.Component {
 			grid: GRID,
 			winner: null,
 			draw: false,
+			hasStarted: false,
 		}
 
 		this.handleClick = this.handleClick.bind(this);
@@ -66,8 +76,11 @@ class App extends React.Component {
 		const gridItems = this.getIndexes({grid: this.state.grid, value: currentValue});
 		const winner = this.checkWinner(gridItems);
 		this.setState({ winner: winner });
-
 		this.checkForDraw(gridItems)
+	}
+
+	startGame() {
+		this.setState({ hasStarted: true })
 	}
 
 	checkForDraw(grid) {
@@ -135,19 +148,21 @@ class App extends React.Component {
     return (
       <div>
 				<h2>Tic Tac Toe</h2>
+				{ this.state.winner 
+					? <div>	<div className={flex}> Player {this.state.winner} won! </div> </div>: <div style={ghost}>0</div>}
+				{ this.state.draw && !this.state.winner
+					 ? <div> It's a draw </div> : <div style={ghost}>0</div>}
 				<Board 
 					rows={grid}
 					onClick={this.handleClick}
 				/>
-				{ this.state.winner 
-				? <div>
-						<div className={styles}> Player {this.state.winner} won! </div> 
-					</div>
-				: ''}
-				{ this.state.draw
-					? <div> It's a draw </div> 
-					: ''}
-				<button onClick={this.restartGame}> Restart </button>
+
+				<button 
+				className="restart-button"
+				style={margin}
+				onClick={this.restartGame}> 
+					Restart 
+				</button>
       </div>
     )}
 }
