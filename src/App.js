@@ -160,7 +160,7 @@ class App extends React.Component {
 					{!this.state.hasStarted ? 'Start': 'Restart'} 
 				</button>
 				<div>
-					Player { this.state.currentValue } next
+					{this.state.hasStarted ? "Next Move: Player " + this.state.currentValue : null }
 				</div>
       </div>
     )}
