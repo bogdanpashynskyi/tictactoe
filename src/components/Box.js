@@ -9,9 +9,9 @@ const Box = ({
   const indexes = { rowIndex, columnIndex }
     return (
         <div 
-        className="boxes"
+        className="app__boxes rounded "
         onClick={() => onClick(indexes)}>
-            <h3> {value} </h3>
+        <div className="app__value"> {value}</div>
         </div>
     )
 }

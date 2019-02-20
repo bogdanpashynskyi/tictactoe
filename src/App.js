@@ -22,7 +22,7 @@ const winCombos = [
 
 const flex = {
 	"display": "flex",
-	
+
 }
 
 const margin = {
@@ -52,7 +52,7 @@ class App extends React.Component {
 	handleClick({ rowIndex, columnIndex }) {
 		
 		// disable clicks if there is a winner
-		if (this.state.winner) {
+		if (this.state.winner || this.state.hasStarted === false) {
 			return
 		}
 		const {
@@ -79,10 +79,6 @@ class App extends React.Component {
 		this.checkForDraw(gridItems)
 	}
 
-	startGame() {
-		this.setState({ hasStarted: true })
-	}
-
 	checkForDraw(grid) {
 		let count = 0;
 		for (let i = 0; grid.length > i; i++) {
@@ -97,7 +93,6 @@ class App extends React.Component {
 	}
 
 	checkWinner(grid) {
-
 		if (this.state.winner !== null) {
 			return
 		}
@@ -137,7 +132,8 @@ class App extends React.Component {
 	restartGame() {
 		const newGrid = cloneDeep(cloneGrid);
 		this.setState({ 
-			grid: newGrid, 
+			grid: newGrid,
+			hasStarted: true, 
 			winner: null, 
 			currentValue: 'X',
 			draw: false })
@@ -149,20 +145,23 @@ class App extends React.Component {
       <div>
 				<h2>Tic Tac Toe</h2>
 				{ this.state.winner 
-					? <div>	<div className={flex}> Player {this.state.winner} won! </div> </div>: <div style={ghost}>0</div>}
+					? <div>	<div className={flex}> Player {this.state.winner} won! </div> </div> 
+					: <div style={ghost}>0</div>}
 				{ this.state.draw && !this.state.winner
 					 ? <div> It's a draw </div> : <div style={ghost}>0</div>}
 				<Board 
 					rows={grid}
 					onClick={this.handleClick}
 				/>
-
 				<button 
-				className="restart-button"
-				style={margin}
-				onClick={this.restartGame}> 
-					Restart 
+					className="btn btn-primary"
+					style={margin}
+					onClick={this.restartGame}> 
+					{!this.state.hasStarted ? 'Start': 'Restart'} 
 				</button>
+				<div>
+					Player { this.state.currentValue } next
+				</div>
       </div>
     )}
 }

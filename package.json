@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development"
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "lint": "eslint --ext .js ./src"
   },
   "repository": {
     "type": "git",
@@ -17,32 +18,37 @@
   "bugs": {
     "url": "https://github.com/bogdanpashynskyi/tictactoe/issues"
   },
-  "devtool": "source-map",
   "homepage": "https://github.com/bogdanpashynskyi/tictactoe#readme",
   "devDependencies": {
     "@babel/core": "^7.3.3",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.0",
+    "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.0",
-    "global": "^4.3.2",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "html-webpack-plugin": "^3.2.0",
     "react-hot-loader": "^4.6.5",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.29.5",
+    "webpack": "^4.29.4",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "lodash": "^4.17.11",
     "lodash.clonedeep": "^4.5.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "react-lodash": "^0.1.2"
+    "react-lodash": "^0.1.2",
+    "style-loader": "^0.23.1"
   }
 }

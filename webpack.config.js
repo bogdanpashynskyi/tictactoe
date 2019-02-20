@@ -16,7 +16,8 @@ module.exports = {
         ]
       },
       resolve: {
-        extensions: ['*', '.js', '.jsx']
+        extensions: ['*', '.js', '.jsx', 'css'],
+
       },
     output: {
       path: __dirname + '/dist',
@@ -26,6 +27,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin()
       ],
+    devtool: "source-map",
     devServer: {
       contentBase: './dist',
       hot: true,
